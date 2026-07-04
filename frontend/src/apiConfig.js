@@ -1,6 +1,6 @@
 // API Configuration
 // Update this URL after deploying the backend to Render
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export const api = {
   customers: `${API_BASE_URL}/api/customers`,

@@ -11,6 +11,35 @@ This guide covers deploying the Automotive Appointment System to production.
 
 ## Deployment Options
 
+### Option 0: GitHub Pages Frontend Deployment
+
+The frontend is configured to build and deploy on GitHub using GitHub Actions. You do not need to build it locally.
+
+1. Push this project to:
+```bash
+https://github.com/Farazsaleem-86/automotive-appointment-system
+```
+
+2. In GitHub, open the repository settings:
+   - Go to **Settings**
+   - Go to **Pages**
+   - Set **Source** to **GitHub Actions**
+
+3. Push to the `main` branch. The workflow at `.github/workflows/deploy-frontend.yml` will:
+   - Install frontend dependencies
+   - Build the Vite React app
+   - Deploy `frontend/dist` to GitHub Pages
+
+4. After the workflow succeeds, the website will be available at:
+```text
+https://farazsaleem-86.github.io/automotive-appointment-system/
+```
+
+To connect the deployed frontend to a deployed backend, add this GitHub Actions environment variable or repository variable before building:
+```text
+VITE_API_URL=https://your-backend-url
+```
+
 ### Option 1: VPS/Cloud Server (Recommended)
 
 #### Backend Deployment

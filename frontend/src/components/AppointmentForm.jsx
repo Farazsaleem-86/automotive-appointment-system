@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { API_BASE_URL } from '../apiConfig'
 import { Calendar, Clock, User, Car, CheckCircle, ArrowRight } from 'lucide-react'
 
 function AppointmentForm() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const selectedVehicle = location.state?.vehicle || ''
+  const selectedServiceType = location.state?.serviceType || ''
   const [customers, setCustomers] = useState([])
   const [leads, setLeads] = useState([])
   const [formData, setFormData] = useState({
     customer_id: '',
     lead_id: '',
-    service_type: '',
+    service_type: selectedServiceType,
     appointment_date: '',
     appointment_time: '',
-    notes: '',
+    notes: selectedVehicle ? `Vehicle of interest: ${selectedVehicle}` : '',
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -87,7 +90,9 @@ function AppointmentForm() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Book Your Test Drive</h1>
-          <p className="text-gray-600 text-lg">Schedule your appointment in just a few simple steps</p>
+          <p className="text-gray-600 text-lg">
+            {selectedVehicle || 'Schedule your appointment in just a few simple steps'}
+          </p>
         </div>
 
         {/* Progress Steps */}
@@ -144,6 +149,13 @@ function AppointmentForm() {
                     ))}
                   </select>
                 </div>
+
+                <Link
+                  to="/customers/new"
+                  className="inline-flex text-sm font-semibold text-carvana-blue hover:text-blue-700"
+                >
+                  Create a new customer first
+                </Link>
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">

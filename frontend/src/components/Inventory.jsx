@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Car, DollarSign, Calendar, Fuel, Gauge, ArrowRight, Heart } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Car, Calendar, Fuel, Gauge, ArrowRight, Heart, Search } from 'lucide-react'
 
 function Inventory() {
   const [filters, setFilters] = useState({
@@ -73,7 +74,7 @@ function Inventory() {
       transmission: 'Automatic',
       color: 'Blue',
       image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&h=300&fit=crop',
-      features: ['M Sport Package', 'HUD', 'Harman Kardon', '360° Camera']
+      features: ['M Sport Package', 'HUD', 'Harman Kardon', '360 Degree Camera']
     },
     {
       id: 6,
@@ -197,7 +198,7 @@ function Inventory() {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="text-xl font-bold text-gray-800">{vehicle.make} {vehicle.model}</h3>
-                    <p className="text-gray-500 text-sm">{vehicle.transmission} • {vehicle.color}</p>
+                    <p className="text-gray-500 text-sm">{vehicle.transmission} - {vehicle.color}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-bold text-carvana-blue">${vehicle.price.toLocaleString()}</p>
@@ -238,10 +239,17 @@ function Inventory() {
                 </div>
 
                 {/* CTA Button */}
-                <button className="w-full bg-carvana-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center group-hover:bg-carvana-orange">
+                <Link
+                  to="/appointments/new"
+                  state={{
+                    serviceType: 'Test Drive',
+                    vehicle: `${vehicle.year} ${vehicle.make} ${vehicle.model}`,
+                  }}
+                  className="w-full bg-carvana-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center group-hover:bg-carvana-orange"
+                >
                   Book Test Drive
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -256,14 +264,6 @@ function Inventory() {
         )}
       </div>
     </div>
-  )
-}
-
-function Search({ className }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
   )
 }
 

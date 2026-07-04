@@ -50,10 +50,13 @@ function Navigation() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <button className="bg-carvana-orange text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
+            <Link
+              to="/inventory"
+              className="bg-carvana-orange text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md"
+            >
               <Search className="w-4 h-4 inline mr-2" />
               Search Cars
-            </button>
+            </Link>
           </div>
         </div>
       </div>
