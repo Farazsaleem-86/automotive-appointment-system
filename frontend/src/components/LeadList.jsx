@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig'
 
 function LeadList() {
   const [leads, setLeads] = useState([])
@@ -14,7 +15,7 @@ function LeadList() {
     setLoading(true)
     try {
       const params = filter !== 'all' ? { status: filter } : {}
-      const res = await axios.get('/api/leads', { params })
+      const res = await axios.get(`${API_BASE_URL}/api/leads`, { params })
       setLeads(res.data)
     } catch (error) {
       console.error('Error fetching leads:', error)
@@ -25,7 +26,7 @@ function LeadList() {
   
   const updateLeadStatus = async (leadId, newStatus) => {
     try {
-      await axios.put(`/api/leads/${leadId}`, { status: newStatus })
+      await axios.put(`${API_BASE_URL}/api/leads/${leadId}`, { status: newStatus })
       fetchLeads()
     } catch (error) {
       console.error('Error updating lead:', error)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig'
 
 function AppointmentList() {
   const [appointments, setAppointments] = useState([])
@@ -14,7 +15,7 @@ function AppointmentList() {
     setLoading(true)
     try {
       const params = filter !== 'all' ? { status: filter } : {}
-      const res = await axios.get('/api/appointments', { params })
+      const res = await axios.get(`${API_BASE_URL}/api/appointments`, { params })
       setAppointments(res.data)
     } catch (error) {
       console.error('Error fetching appointments:', error)
@@ -25,7 +26,7 @@ function AppointmentList() {
   
   const updateAppointmentStatus = async (appointmentId, newStatus) => {
     try {
-      await axios.put(`/api/appointments/${appointmentId}`, { status: newStatus })
+      await axios.put(`${API_BASE_URL}/api/appointments/${appointmentId}`, { status: newStatus })
       fetchAppointments()
     } catch (error) {
       console.error('Error updating appointment:', error)
@@ -35,7 +36,7 @@ function AppointmentList() {
   const deleteAppointment = async (appointmentId) => {
     if (window.confirm('Are you sure you want to delete this appointment?')) {
       try {
-        await axios.delete(`/api/appointments/${appointmentId}`)
+        await axios.delete(`${API_BASE_URL}/api/appointments/${appointmentId}`)
         fetchAppointments()
       } catch (error) {
         console.error('Error deleting appointment:', error)

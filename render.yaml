@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: automotive-appointment-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./appointment_system.db
+      - key: BUSINESS_NAME
+        value: Your Automotive Dealership
+      - key: BUSINESS_ADDRESS
+        value: 123 Main Street, City, State 12345
+      - key: BUSINESS_PHONE
+        value: (555) 123-4567
+      - key: BUSINESS_EMAIL
+        value: contact@dealership.com
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://farazsaleem-86.github.io/automotive-appointment-system

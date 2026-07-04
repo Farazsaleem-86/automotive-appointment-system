@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig'
 
 function AppointmentForm() {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ function AppointmentForm() {
   
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get('/api/customers')
+      const res = await axios.get(`${API_BASE_URL}/api/customers`)
       setCustomers(res.data)
     } catch (err) {
       console.error('Error fetching customers:', err)
@@ -33,7 +34,7 @@ function AppointmentForm() {
   
   const fetchLeads = async () => {
     try {
-      const res = await axios.get('/api/leads')
+      const res = await axios.get(`${API_BASE_URL}/api/leads`)
       setLeads(res.data.filter(lead => lead.status !== 'Closed'))
     } catch (err) {
       console.error('Error fetching leads:', err)
@@ -58,7 +59,7 @@ function AppointmentForm() {
         customer_id: parseInt(formData.customer_id),
         lead_id: formData.lead_id ? parseInt(formData.lead_id) : null,
       }
-      await axios.post('/api/appointments', payload)
+      await axios.post(`${API_BASE_URL}/api/appointments`, payload)
       navigate('/')
     } catch (err) {
       setError('Failed to create appointment. Please try again.')

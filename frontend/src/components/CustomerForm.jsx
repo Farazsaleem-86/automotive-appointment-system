@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig'
 
 function CustomerForm() {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ function CustomerForm() {
     setError('')
     
     try {
-      await axios.post('/api/customers', formData)
+      await axios.post(`${API_BASE_URL}/api/customers`, formData)
       navigate('/')
     } catch (err) {
       setError('Failed to create customer. Please try again.')

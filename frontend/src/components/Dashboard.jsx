@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Users, Calendar, Phone, TrendingUp } from 'lucide-react'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig'
 
 function Dashboard() {
   const [stats, setStats] = useState(null)
@@ -15,9 +16,9 @@ function Dashboard() {
   const fetchDashboardData = async () => {
     try {
       const [statsRes, appointmentsRes, leadsRes] = await Promise.all([
-        axios.get('/api/dashboard/stats'),
-        axios.get('/api/dashboard/upcoming-appointments'),
-        axios.get('/api/dashboard/recent-leads')
+        axios.get(`${API_BASE_URL}/api/dashboard/stats`),
+        axios.get(`${API_BASE_URL}/api/dashboard/upcoming-appointments`),
+        axios.get(`${API_BASE_URL}/api/dashboard/recent-leads`)
       ])
       
       setStats(statsRes.data)
