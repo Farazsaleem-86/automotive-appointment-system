@@ -1,27 +1,34 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Users, Calendar, Phone } from 'lucide-react'
+import { LayoutDashboard, Users, Calendar, Phone, Car, Search } from 'lucide-react'
 
 function Navigation() {
   const location = useLocation()
   
   const navItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/inventory', label: 'Inventory', icon: Car },
     { path: '/customers/new', label: 'New Customer', icon: Users },
-    { path: '/appointments/new', label: 'New Appointment', icon: Calendar },
+    { path: '/appointments/new', label: 'Book Test Drive', icon: Calendar },
     { path: '/leads', label: 'Leads', icon: Phone },
     { path: '/appointments', label: 'Appointments', icon: Calendar },
   ]
   
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-lg border-b-4 border-carvana-blue">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-2">
-            <CarIcon className="w-8 h-8 text-primary-600" />
-            <span className="text-xl font-bold text-gray-800">AutoAppointments</span>
+        <div className="flex items-center justify-between h-20">
+          <div className="flex items-center space-x-3">
+            <div className="bg-carvana-blue p-2 rounded-lg">
+              <CarIcon className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <span className="text-2xl font-bold text-carvana-dark">AutoDealership</span>
+              <p className="text-xs text-gray-500">Premium Car Sales & Service</p>
+            </div>
           </div>
-          <div className="flex space-x-4">
+          
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = location.pathname === item.path
@@ -29,10 +36,10 @@ function Navigation() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
                     isActive
-                      ? 'bg-primary-100 text-primary-700'
-                      : 'text-gray-600 hover:bg-gray-100'
+                      ? 'bg-carvana-blue text-white shadow-md'
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-carvana-blue'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -40,6 +47,13 @@ function Navigation() {
                 </Link>
               )
             })}
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <button className="bg-carvana-orange text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
+              <Search className="w-4 h-4 inline mr-2" />
+              Search Cars
+            </button>
           </div>
         </div>
       </div>

@@ -19,6 +19,12 @@ export default {
           800: '#075985',
           900: '#0c4a6e',
         },
+        carvana: {
+          blue: '#0066cc',
+          dark: '#1a1a1a',
+          gray: '#f5f5f5',
+          orange: '#ff6b35',
+        },
       },
     },
   },
