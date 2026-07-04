@@ -8,9 +8,11 @@ import AppointmentList from './components/AppointmentList'
 import Inventory from './components/Inventory'
 import Navigation from './components/Navigation'
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={routerBasename}>
       <div className="min-h-screen bg-gray-50">
         <Navigation />
         <main>
